@@ -6,26 +6,46 @@ The program will then say higher or lower depending on the guess until the user 
 #include <iostream>
 #include <cstdlib> // for rand() function
 
-//function to return random number between 1 and 10 to kick off game
+int userGuess;
+
+//function to return random number between 1 and 100
 int randomNumGen()
 {
-    return rand() % 10 + 1;
+    return rand() % 100 + 1;
 }
 
-
+int userInput()
+{
+    std::cin >> userGuess;
+    return userGuess;
+}
 
 int main()
 {
     // Get a different random number each time the program runs
     srand(time(0));
-
-    int userGuess; 
     int randNum = randomNumGen();
 
-    std::cout << "Welcome to the number guesser game!\n";
-    std::cout << "Guess a number between 1 and 10: ";
-    std::cin >> userGuess;
 
+    std::cout << "Welcome to the number guesser game!\n";
+    std::cout << "Guess a number between 1 and 100: ";
+    userInput();
+
+    while (userGuess != randNum)
+    {
+        if (userGuess < randNum)
+        {
+            std::cout << "The number is higher! Guess again: ";
+            userInput();
+        }
+        else if (userGuess > randNum)
+        {
+            std::cout << "The number is lower! Guess again: ";
+            userInput();
+        }
+    }
+
+    std::cout << "Yay! the correct answer was " << randNum;
     return 0;
 }
 
